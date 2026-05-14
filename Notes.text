@@ -1,0 +1,18 @@
+Hello world
+#gam = 10
+    #[-0.23851648 -0.23851648] #[-0.23851648 -0.23851648]
+    #3.925231146709438e-17
+    #gam = 0.1
+    #The old middle point [-0.23851648 -0.23851648] and the new middel point [-0.23851648 -0.23851648] 
+    #The different is 0.0
+    #gam = 1 
+    #  The old middle point [-0.23851648 -0.23851648] and the new middel point [-0.23851648 -0.23851648] 
+    # The different is 0.0
+    #gam = 100
+    # The old middle point [-0.23851648 -0.23851648] and the new middel point [-0.23851648 -0.23851648] 
+    # The different is 3.925231146709438e-17
+
+
+    #Normalized
+    # The old middle point of original region [-0.23851648 -0.23851648] and the normalized region middel point [-0.28989795 -0.28989795] 
+    # The different is 0.07266436867846954
