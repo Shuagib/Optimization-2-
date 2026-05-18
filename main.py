@@ -32,9 +32,9 @@ if __name__ == '__main__':
 
     x = np.array([0.0,0.0]) #Intia start 
 
-    x_old, arr_x  = newton_metod(func,x,Mat,b,10)
-    x_new, arr_x = newton_metod(func,x,Mat_gam,b_gam,10)
-    x_norm, arr_x = newton_metod(func,x,Mat,b_norm,10)
+    x_old, arr_x  = newton_method(func,x,Mat,b,10)
+    x_new, arr_x = newton_method(func,x,Mat_gam,b_gam,10)
+    x_norm, arr_x = newton_method(func,x,Mat,b_norm,10)
 
     #print(f" The old middle point {x_old} and the new middel point {x_new} ")  
     #print(f" The different is {np.linalg.norm(x_old - x_new )}") 

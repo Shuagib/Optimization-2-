@@ -16,7 +16,7 @@ def func(x, A, b):
 
 #Newton method 
 #Probably has to check for eigen values aswell
-def newton_metod(f, x, Mat, b, k_max):
+def newton_method(f, x, Mat, b, k_max):
     hes = hessian(f)
     fir = grad(f)
     ep = 0.001 
