@@ -19,17 +19,16 @@ def func(x, A, b):
 def newton_method(f, x, Mat, b, k_max):
     hes = hessian(f)
     fir = grad(f)
-    ep = 0.001 
-    #num1 = random.random() #Random Start
-    #num2 = random.random() # Random Start 
+    ep = 1e-6
     arr_x = []
-    while k_max > ep:
-        g = fir(x, Mat, b)
+    for _ in range(k_max):
+        gradient = fir(x, Mat, b)
+        if np.linalg.norm(gradient) < ep:
+            break
         H = hes(x, Mat, b)
-        d = la.inv(H) @ g
-        x = x - d
+        descent_dir = la.solve(H, gradient)
+        x = x - descent_dir
         arr_x.append(x.copy())
-        k_max = k_max - 1
     return x, arr_x
 
 #Checking if our points are inside of polyhedron if
@@ -37,7 +36,7 @@ def newton_method(f, x, Mat, b, k_max):
 def constrain(A,x,b):
     return b - A @ x 
 
-def plot_polyhedron(Mat, b, x_star):
+def plot_polyhedron(Mat, b, x_star,x_init):
     x1 = np.linspace(-2, 2, 100)
     x2 = np.linspace(-2, 2, 100)
     X1, X2 = np.meshgrid(x1, x2)
@@ -62,6 +61,7 @@ def plot_polyhedron(Mat, b, x_star):
 
     # center point
     plt.scatter(*x_star, color='red', zorder=5, s=100, label='x*')
+    plt.scatter(*x_init, color='green', zorder=5, s=100, label='x_init')
     plt.legend()
     plt.grid(alpha=0.3)
     plt.show()
