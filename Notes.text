@@ -16,3 +16,40 @@ Hello world
     #Normalized
     # The old middle point of original region [-0.23851648 -0.23851648] and the normalized region middel point [-0.28989795 -0.28989795] 
     # The different is 0.07266436867846954
+
+
+
+
+    Each slack tell how far we are from the boundary [1.23851648 1.23851648 0.76148352 0.76148352 1.97703296]
+    Minium slack Original   0.7614835190375594
+    ====================================================================================
+    gamma is 0.1
+    Slack from scaling [1.23851648 1.23851648 0.76148352 0.76148352 0.1977033 ]
+    Miniums slack from scaling  0.19770329619248814
+
+
+
+    Each slack tell how far we are from the boundary [1.23851648 1.23851648 0.76148352 0.76148352 1.97703296]
+    Minium slack Original   0.7614835190375594
+    ====================================================================================
+    gamma is 1
+    Slack from scaling [1.23851648 1.23851648 0.76148352 0.76148352 1.97703296]
+    Miniums slack from scaling  0.7614835190375594
+
+
+
+    Each slack tell how far we are from the boundary [1.23851648 1.23851648 0.76148352 0.76148352 1.97703296]
+    Minium slack Original   0.7614835190375594
+    ====================================================================================
+    gamma is 10
+    Slack from scaling [ 1.23851648  1.23851648  0.76148352  0.76148352 19.77032962]
+    Miniums slack from scaling  0.7614835190375595
+
+
+
+    Each slack tell how far we are from the boundary [1.23851648 1.23851648 0.76148352 0.76148352 1.97703296]
+    Minium slack Original   0.7614835190375594
+    ====================================================================================
+    gamma is 100
+    Slack from scaling [  1.23851648   1.23851648   0.76148352   0.76148352 197.70329619]
+    Miniums slack from scaling  0.7614835190375595

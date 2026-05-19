@@ -36,7 +36,7 @@ def newton_method(f, x, Mat, b, k_max):
 def constrain(A,x,b):
     return b - A @ x 
 
-def plot_polyhedron(Mat, b, x_star,x_init):
+def plot_polyhedron(Mat, b, x_star):
     x1 = np.linspace(-2, 2, 100)
     x2 = np.linspace(-2, 2, 100)
     X1, X2 = np.meshgrid(x1, x2)
@@ -61,7 +61,6 @@ def plot_polyhedron(Mat, b, x_star,x_init):
 
     # center point
     plt.scatter(*x_star, color='red', zorder=5, s=100, label='x*')
-    plt.scatter(*x_init, color='green', zorder=5, s=100, label='x_init')
     plt.legend()
     plt.grid(alpha=0.3)
     plt.show()
