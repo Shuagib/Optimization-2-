@@ -20,7 +20,7 @@ if __name__ == '__main__':
     #Gamma applied to row 5 on Matrix 
     Mat_gam = np.array([
         [1,0], 
-        [0,1], 
+        [0,1],
         [-1,0], 
         [0,-1], 
         [gam*1,gam*1]])
