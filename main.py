@@ -3,8 +3,7 @@ from Task_3 import *
 import numpy as np
 
 if __name__ == '__main__':
-    gam = 10
-
+    gam = 100
 
     #Standard Matrix
     Mat = np.array([
@@ -49,13 +48,13 @@ if __name__ == '__main__':
 
     #=============== Calculating the different on Gamma and Original=================================================#
     #Newton method results original 
-    print(f" The steps towards the end point {arr_x}  Centerpoint {x_old}")
+    # print(f" The steps towards the end point {arr_x}  Centerpoint {x_old}")
 
-    #Computing Newton method on scaled version
-    print(f" The old middle point {x_old} and the new middel point {x_new} ")  
+    # #Computing Newton method on scaled version
+    # print(f" The old middle point {x_old} and the new middel point {x_new} ")  
 
-    # #Calculating the difference. 
-    print(f" The different is {np.linalg.norm(x_old - x_new )}")
+    # # #Calculating the difference. 
+    # print(f" The different is {np.linalg.norm(x_old - x_new )}")
 
     # ============================= Normalization testing =======================================
     # print(f" The old middle point of original region {x_old} and the normalized region middel point {x_norm} ")  
@@ -63,18 +62,18 @@ if __name__ == '__main__':
 
     #===================== Trying to print the scaling of each row corresponding in A and b with respected gamma, to see if the center points differs=========
     for row in range(5):
-        Mat_gam = Mat.copy()
-        b_gam = b.copy()
+        Mat_gam =  Mat.astype(float).copy()
+        b_gam =  b.astype(float).copy()
         Mat_gam[row] = gam * Mat[row]
         b_gam[row]   = gam * b[row]
         
         x_new, _ = newton_method(func, x, Mat_gam, b_gam, 50)
         x_old ,_  = newton_method(func,x,Mat,b,50)
 
-        # print(f"Current Matrix A {Mat_gam}")
-        # print(f"Current Vector b  {b_gam}")
-        # print(f"Scaling row {row+1} as { Mat_gam[row]} by gamma={gam}: x* = {x_new} and the old point is x*_old {x_old}")
-        # print(f" The different is {np.linalg.norm(x_old - x_new )}") 
+        print(f"Current Matrix A {Mat_gam}")
+        print(f"Current Vector b  {b_gam}")
+        print(f"Scaling row {row+1} as { Mat_gam[row]} by gamma={gam}: x* = {x_new} and the old point is x*_old {x_old}")
+        print(f" The different is {np.linalg.norm(x_old - x_new )}") 
 
 
     #print(f"Center point{x_new}")

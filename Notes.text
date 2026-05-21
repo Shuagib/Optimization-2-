@@ -53,3 +53,134 @@ Hello world
     gamma is 100
     Slack from scaling [  1.23851648   1.23851648   0.76148352   0.76148352 197.70329619]
     Miniums slack from scaling  0.7614835190375595
+
+
+
+
+    Current Matrix A [[ 1  0]
+ [ 0  1]
+ [-1  0]
+ [ 0 -1]
+ [ 1  1]]
+Current Vector b  [1.  1.  1.  1.  1.5]
+Scaling row 1 as [1 0] by gamma=1: x* = [-0.23851648 -0.23851648] and the old point is x*_old [-0.23851648 -0.23851648]
+ The different is 0.0
+Current Matrix A [[ 1  0]
+ [ 0  1]
+ [-1  0]
+ [ 0 -1]
+ [ 1  1]]
+Current Vector b  [1.  1.  1.  1.  1.5]
+Scaling row 2 as [0 1] by gamma=1: x* = [-0.23851648 -0.23851648] and the old point is x*_old [-0.23851648 -0.23851648]
+ The different is 0.0
+Current Matrix A [[ 1  0]
+ [ 0  1]
+ [-1  0]
+ [ 0 -1]
+ [ 1  1]]
+Current Vector b  [1.  1.  1.  1.  1.5]
+Scaling row 3 as [-1  0] by gamma=1: x* = [-0.23851648 -0.23851648] and the old point is x*_old [-0.23851648 -0.23851648]
+ The different is 0.0
+Current Matrix A [[ 1  0]
+ [ 0  1]
+ [-1  0]
+ [ 0 -1]
+ [ 1  1]]
+Current Vector b  [1.  1.  1.  1.  1.5]
+Scaling row 4 as [ 0 -1] by gamma=1: x* = [-0.23851648 -0.23851648] and the old point is x*_old [-0.23851648 -0.23851648]
+ The different is 0.0
+Current Matrix A [[ 1  0]
+ [ 0  1]
+ [-1  0]
+ [ 0 -1]
+ [ 1  1]]
+Current Vector b  [1.  1.  1.  1.  1.5]
+Scaling row 5 as [1 1] by gamma=1: x* = [-0.23851648 -0.23851648] and the old point is x*_old [-0.23851648 -0.23851648]
+ The different is 0.0
+
+
+
+
+ Current Matrix A [[100   0]
+ [  0   1]
+ [ -1   0]
+ [  0  -1]
+ [  1   1]]
+Current Vector b  [100.    1.    1.    1.    1.5]
+Scaling row 1 as [100   0] by gamma=100: x* = [-0.23851648 -0.23851648] and the old point is x*_old [-0.23851648 -0.23851648]
+ The different is 0.0
+Current Matrix A [[  1   0]
+ [  0 100]
+ [ -1   0]
+ [  0  -1]
+ [  1   1]]
+Current Vector b  [  1.  100.    1.    1.    1.5]
+Scaling row 2 as [  0 100] by gamma=100: x* = [-0.23851648 -0.23851648] and the old point is x*_old [-0.23851648 -0.23851648]
+ The different is 0.0
+Current Matrix A [[   1    0]
+ [   0    1]
+ [-100    0]
+ [   0   -1]
+ [   1    1]]
+Current Vector b  [  1.    1.  100.    1.    1.5]
+Scaling row 3 as [-100    0] by gamma=100: x* = [-0.23851648 -0.23851648] and the old point is x*_old [-0.23851648 -0.23851648]
+ The different is 3.925231146709438e-17
+Current Matrix A [[   1    0]
+ [   0    1]
+ [  -1    0]
+ [   0 -100]
+ [   1    1]]
+Current Vector b  [  1.    1.    1.  100.    1.5]
+Scaling row 4 as [   0 -100] by gamma=100: x* = [-0.23851648 -0.23851648] and the old point is x*_old [-0.23851648 -0.23851648]
+ The different is 8.777083671441753e-17
+Current Matrix A [[  1   0]
+ [  0   1]
+ [ -1   0]
+ [  0  -1]
+ [100 100]]
+Current Vector b  [  1.   1.   1.   1. 150.]
+Scaling row 5 as [100 100] by gamma=100: x* = [-0.23851648 -0.23851648] and the old point is x*_old [-0.23851648 -0.23851648]
+ The different is 2.7755575615628914e-17
+
+
+
+ Current Matrix A [[ 0  0]
+ [ 0  1]
+ [-1  0]
+ [ 0 -1]
+ [ 1  1]]
+Current Vector b  [0.1 1.  1.  1.  1.5]
+Scaling row 1 as [0 0] by gamma=0.1: x* = [ 0.40936494 -0.31872962] and the old point is x*_old [-0.23851648 -0.23851648]
+ The different is 0.6528280692043794
+Current Matrix A [[ 1  0]
+ [ 0  0]
+ [-1  0]
+ [ 0 -1]
+ [ 1  1]]
+Current Vector b  [1.  0.1 1.  1.  1.5]
+Scaling row 2 as [0 0] by gamma=0.1: x* = [-0.31872962  0.40936494] and the old point is x*_old [-0.23851648 -0.23851648]
+ The different is 0.6528280692043795
+Current Matrix A [[ 1  0]
+ [ 0  1]
+ [ 0  0]
+ [ 0 -1]
+ [ 1  1]]
+Current Vector b  [1.  1.  0.1 1.  1.5]
+Scaling row 3 as [0 0] by gamma=0.1: x* = [-2.48699034e+06 -8.08105282e-14] and the old point is x*_old [-0.23851648 -0.23851648]
+ The different is 2486990.0966752353
+Current Matrix A [[ 1  0]
+ [ 0  1]
+ [-1  0]
+ [ 0  0]
+ [ 1  1]]
+Current Vector b  [1.  1.  1.  0.1 1.5]
+Scaling row 4 as [0 0] by gamma=0.1: x* = [-8.07863193e-14 -2.48699034e+06] and the old point is x*_old [-0.23851648 -0.23851648]
+ The different is 2486990.0966752353
+Current Matrix A [[ 1  0]
+ [ 0  1]
+ [-1  0]
+ [ 0 -1]
+ [ 0  0]]
+Current Vector b  [1.   1.   1.   1.   0.15]
+Scaling row 5 as [0 0] by gamma=0.1: x* = [0. 0.] and the old point is x*_old [-0.23851648 -0.23851648]
+ The different is 0.3373132422265876
