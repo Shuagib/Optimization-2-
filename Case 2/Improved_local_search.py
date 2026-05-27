@@ -273,7 +273,7 @@ def greedy_algorithm(problem):
                     break
         if best_move is None:
             break
-        print(f"best move: {best_move}")
+        #print(f"best move: {best_move}")
         best_move.apply_move(s)
         #print(f"s: {s}\n")
     end_time = time.perf_counter()
@@ -312,6 +312,56 @@ def best_improvement(solution):
     end_time = time.time()
     res_time = end_time - start_time
     return s, res_time
+
+def geometric(temp,k):
+    return temp * 0.99
+
+
+def simulated_annealing(problem, schedule=geometric, time_limit=60):
+    s, _ = greedy_algorithm(problem)
+    neigh = problem.local_neighbourhood()
+
+    best = s.copy_solution()
+    best_val = s.objective_value()
+
+    # Initial temperature
+    temp = s.objective_value() * 0.02 / abs(math.log(0.97))
+    temp_min = 0.01
+
+    # Number of sampled moves per temperature level
+    inner = max(100, problem.stud)
+    
+    start = time.time()
+    k = 0
+
+    while temp > temp_min and time.time() - start < time_limit:  
+        for _ in range(inner):
+            if time.time() - start >= time_limit:
+                break
+
+            moves = neigh.moves(s)
+
+            move = None
+            for i, m in enumerate(moves):
+                if random.randint(0, i) == 0:
+                    move = m
+
+            if move is None:
+                break
+        
+            delta = move.objective_value_increment(s)
+
+            if delta < 0 or random.random() < math.exp(-delta / temp):
+                move.apply_move(s)
+                val = s.objective_value()
+
+                if val < best_val:
+                    best, best_val = s.copy_solution(), val
+
+        k += 1
+        temp = schedule(temp, k)
+        
+    return best
 
 
 

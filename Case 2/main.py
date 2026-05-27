@@ -5,8 +5,6 @@ import statistics, time
 
 if __name__ == '__main__':
 
-    
-
 #================================ Testing Construction Heuristics ========================================#
 #=============================================SMALL FILES==============================================#
     # f_1 = open("tfp_13n_3q_4l_5u_3a_5d.txt")
@@ -69,24 +67,22 @@ if __name__ == '__main__':
 
 
 #================== Testing Random Greedy #===================
+    # f_1 = open("tfp_13n_3q_4l_5u_3a_5d.txt")
+    # p = Problem.from_textio(f_1)
+    # f_1.close()
 
+    # results = []
+    # times = []
+    # for run in range(10):                        
+    #     start = time.perf_counter()
+    #     s = random_greedy(p)               
+    #     elapsed = time.perf_counter() - start
+    #     results.append(s.objective_value())
+    #     times.append(elapsed)
 
-    f_1 = open("tfp_13n_3q_4l_5u_3a_5d.txt")
-    p = Problem.from_textio(f_1)
-    f_1.close()
-
-    results = []
-    times = []
-    for run in range(10):                        
-        start = time.perf_counter()
-        s = random_greedy(p)               
-        elapsed = time.perf_counter() - start
-        results.append(s.objective_value())
-        times.append(elapsed)
-
-    print(f"Best:   {min(results)}")
-    print(f"Median: {statistics.median(results)}")
-    print(f"Avg time: {statistics.mean(times):.4f}s")
+    # print(f"Best:   {min(results)}")
+    # print(f"Median: {statistics.median(results)}")
+    # print(f"Avg time: {statistics.mean(times):.4f}s")
 
 
 
@@ -112,6 +108,49 @@ if __name__ == '__main__':
 
 
 
-#================================ Meta heuristics  ========================================#
+#================================ Meta heuristic: Simulated Annealing ===================================#
 
+    instances = [
+    "Case 2/tfp_131n_27q_4l_5u_10a_10d.txt",
+    "Case 2/tfp_200n_40q_5l_5u_10a_15d.txt",
+    "Case 2/tfp_300n_60q_5l_5u_10a_40d.txt",
+    ]    
 
+    for filename in instances:
+        with open(filename) as f:
+            p = Problem.from_textio(f)
+
+        results = []
+        times = []
+        best_solution = None
+        best_value = float("inf")
+
+        for run in range(10):
+            print(f"Starting {filename}, run {run + 1}")
+            start = time.perf_counter()
+
+            s = simulated_annealing(p)
+
+            elapsed = time.perf_counter() - start
+            value = s.objective_value()
+
+            results.append(value)
+            times.append(elapsed)
+            
+            print(f"Finished {filename}, run {run + 1}: value={value}, time={elapsed:.2f}s")
+
+            if value < best_value:
+                best_value = value
+                best_solution = s.copy_solution()
+            
+            print(f"{filename}, run {run + 1}: Value={value}, time={elapsed:.2f}s")
+
+        output_file = filename.replace(".txt", "_sa_best.sol")
+        best_solution.save_solution(output_file)
+
+        print("============================================================")
+        print(f"Instance: {filename}")
+        print(f"Best: {min(results)}")
+        print(f"Median: {statistics.median(results)}")
+        print(f"Avg time:  {statistics.mean(times):.2f}s")
+        print(f"Best solution saved to: {output_file}")
