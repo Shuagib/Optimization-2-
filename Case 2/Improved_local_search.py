@@ -45,10 +45,9 @@ class Problem:
 
 
 class Solution:
-    """ Datastructure that represent the partial solution,  is an expression of the decision space. I"""
     def __init__(self,problem):
         self.problem = problem
-        self.team_list = [None] * problem.stud #List of teams index by a stident
+        self.team_list = [None] * problem.stud
         self.lookup = [[] for _ in range(problem.team)] #
         self.lb = 0
         num_attr = len(problem.label[0])
@@ -97,7 +96,6 @@ class AddMove:
     def __init__(self,stud,team,problem):
         self.stud = stud 
         self.team = team 
-        self.lb_incr = None #lower bound incremenentation
         self.problem = problem
 
     def __str__(self):
@@ -107,12 +105,12 @@ class AddMove:
    
     def lower_bound_increment(self, solution):
         counts = solution.team_labels[self.team]      
-        student_labels = self.problem.label[self.stud]
-        incr = 0
-        for a, label in enumerate(student_labels):
+        stud_lab =  self.problem.label[self.stud]
+        lower_bound_incr = 0
+        for a, label in enumerate(stud_lab):
             if counts[a].get(label, 0) == 0:          
-                incr += self.problem.weight[a]        
-        return incr
+                lower_bound_incr += self.problem.weight[a]        
+        return lower_bound_incr
         
         
 
@@ -160,7 +158,7 @@ class AddNeighbourhood:
         # print(len(solution.lookup.keys())) #Amount of member
 
   
-
+#===================================Local search ==================================================================
 
 class LocalMove:
     def __init__(self,s1, s2, neighbourhood):
@@ -263,6 +261,7 @@ class LocalNeighbourhood:
 def greedy_algorithm(problem):
     constr_rule = problem.construction_neighbourhood()
     s = problem.empty_solution()
+    start_time = time.perf_counter()
     while True:
         best_move, best_incr = None, math.inf
         moves = constr_rule.moves(s)
@@ -277,17 +276,29 @@ def greedy_algorithm(problem):
         print(f"best move: {best_move}")
         best_move.apply_move(s)
         #print(f"s: {s}\n")
+    end_time = time.perf_counter()
+    res_time = end_time - start_time
+    return s, res_time
+
+
+#Random
+def random_greedy(problem):
+    constr_rule = problem.construction_neighbourhood()
+    s = problem.empty_solution()
+    while True:
+        moves = list(constr_rule.moves(s))  
+        if not moves:
+            break
+        move = random.choice(moves)       
+        move.apply_move(s)
     return s
-
-#Use GASP aswell
-
 
 
 def best_improvement(solution):
     p = solution.problem
     local_nb = p.local_neighbourhood()
     s = solution.copy_solution()
-    
+    start_time = time.time()
     while True:
         best_move, best_incr = None, math.inf
         for move in local_nb.moves(s):
@@ -298,18 +309,11 @@ def best_improvement(solution):
             break
         best_move.apply_move(s)
         print(f"best_incr: {best_incr}")
-    return s
+    end_time = time.time()
+    res_time = end_time - start_time
+    return s, res_time
 
 
 
 
-
-def geometric(temp, k):
-    return temp * 0.99
-
-def linear(temp, k):
-    return temp - 5
-
-def logarithmic(temp, k, temp0=1000):
-    return temp0 / math.log(k + 2)
 
