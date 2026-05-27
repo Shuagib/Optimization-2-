@@ -18,7 +18,6 @@ import math
 
 
 class Problem:
-    
     def __init__(self, mx):
         self.mx = mx
         self.sz = len(self.mx)
