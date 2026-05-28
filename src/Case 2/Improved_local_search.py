@@ -8,13 +8,13 @@ import time
 class Problem:
     def __init__(self,w:list[int],lb: list[list[int]], dis: list[tuple], team:int, stud:int, max_amount, min_amount):
         """specifies the data structure to represent the particular instance of the problem to solve"""
-        self.weight = w #Weights
-        self.label = lb #Label values lb[student][attribute]
-        self.dis = dis #Disagreement between s_x and s_y (s_x,s_y)
-        self.team = team #The amount of teams
-        self.stud = stud #The amount of students
-        self.max_amount = max_amount #Amount of Max size teams
-        self.min_amount = min_amount # Amounf of Min size of teams
+        self.weight = w 
+        self.label = lb
+        self.dis = dis 
+        self.team = team 
+        self.stud = stud 
+        self.max_amount = max_amount 
+        self.min_amount = min_amount
 
 
     
@@ -31,13 +31,13 @@ class Problem:
         return cls(weights, labels, dis, team, stud, max_amount, min_amount)
 
 
-    def empty_solution(self): #Empty solution
+    def empty_solution(self): 
         return Solution(self)
     
-    def construction_neighbourhood(self): #All allowed moved in construction
+    def construction_neighbourhood(self):
         return AddNeighbourhood(self)
     
-    def local_neighbourhood(self):#All allowed moved in swaps
+    def local_neighbourhood(self):
         return LocalNeighbourhood(self)
 
 
@@ -48,7 +48,7 @@ class Solution:
     def __init__(self,problem):
         self.problem = problem
         self.team_list = [None] * problem.stud
-        self.lookup = [[] for _ in range(problem.team)] #
+        self.lookup = [[] for _ in range(problem.team)] 
         self.lb = 0
         num_attr = len(problem.label[0])
         self.team_labels = {
@@ -58,8 +58,9 @@ class Solution:
 
 
     def __str__(self):
-        return f"\team_List: {self.team_list }\n\t   Look up students: {self.lookup}\n\t lower boubd: { self.lower_bound}"
-    
+        return f"\team_List: {self.team_list }\n\t   Look up students: {self.lookup}\n\t lower bound: { self.lower_bound}"
+
+#Copy a solution for the problem
     def copy_solution(self):
         new = Solution(self.problem)
         new.team_list = self.team_list.copy()
@@ -73,20 +74,20 @@ class Solution:
     
     def objective_value(self):
         return self.lb
-        
+
     def lower_bound(self):
         return -self.ub
-    
+#Save current solution
     def save_solution(self, f):
         with open(f, "w") as file:
             file.write(" ".join(map(str, self.team_list)))
 
+#Helper function to calcuate score of only one team
     def cost_team(self,t):
-        #Calculate the objective value for all students
         total = 0
-        for id, w in enumerate(self.problem.weight): #Loop over weight both index and elem
-            dis = set(self.problem.label[s][id] for s in self.lookup[t]) #Get  distinct values for each team
-            total += w* len(dis) #Do Mutilication 
+        for id, w in enumerate(self.problem.weight): 
+            dis = set(self.problem.label[s][id] for s in self.lookup[t]) 
+            total += w* len(dis) 
         return total
         
 
@@ -102,7 +103,8 @@ class AddMove:
         return f"add node {self.stud} to Team {self.team}"
 
 
-   
+# Cost of adding this student to the team sums the weight of each
+# attribute where the student introduces a label the team doesn't have yet. 
     def lower_bound_increment(self, solution):
         counts = solution.team_labels[self.team]      
         stud_lab =  self.problem.label[self.stud]
@@ -114,18 +116,18 @@ class AddMove:
         
         
 
-
+#Apply move 
+#applying student to team and update the score between labels
     def apply_move(self, solution):
-        # 1. Update the objective tracker 
         solution.lb += self.lower_bound_increment(solution)
         
-        # 2. Update label counts
+  
         student_labels = self.problem.label[self.stud]
         for a, label in enumerate(student_labels):
             counts = solution.team_labels[self.team][a]
-            counts[label] = counts.get(label, 0) + 1   # increment count
+            counts[label] = counts.get(label, 0) + 1  
         
-        # 3. Update lookup and team_list (your existing logic)
+ 
         solution.team_list[self.stud] = self.team
         solution.lookup[self.team].append(self.stud)
         return solution
@@ -135,16 +137,17 @@ class AddNeighbourhood:
     def __init__(self, Problem):
         self.problem = Problem
 
+#Applying all valid move for team construction
     def moves(self,solution):
-        """A move is only valid if it forfill our constrains"""
+      
         min_size = min(len(students) for students in solution.lookup)
         max_size = max(len(students) for students in solution.lookup)
-        for s,team in enumerate(solution.team_list): #Iterate over teams 
-            if team is None: #If there is None
-                for t in range(len(solution.lookup)): #Loop over every student in the team 
-                    if len(solution.lookup[t]) <= max_size and min_size == len(solution.lookup[t]): #Making sure the smallest team get filled first
-                        for a,b in self.problem.dis: #Looking at par in disagreement
-                            #print(self.problem.dis)
+        for s,team in enumerate(solution.team_list): 
+            if team is None:
+                for t in range(len(solution.lookup)):
+                    if len(solution.lookup[t]) <= max_size and min_size == len(solution.lookup[t]): 
+                        for a,b in self.problem.dis: 
+                        
                             if  (s == a and b in solution.lookup[t]) or (s == b and a in solution.lookup[t]): 
                                 break 
                         else:
@@ -155,11 +158,11 @@ class AddNeighbourhood:
         # print(self.problem.dis)
         # print(self.problem.max_amount)
         # print(self.problem.min_amount)
-        # print(len(solution.lookup.keys())) #Amount of member
+        # print(len(solution.lookup.keys())) 
 
   
 #===================================Local search ==================================================================
-
+#LocalMove
 class LocalMove:
     def __init__(self,s1, s2, neighbourhood):
         self.s1 = s1
@@ -172,7 +175,9 @@ class LocalMove:
     
    
     
-
+#Evaluation function of a swap operation
+#Student leave a team and their label counted for the team decrease (increment goes down)
+#Student leave a team and their label counted for the team increase (increment goes go)
     def objective_value_increment(self, solution):
         t1 = solution.team_list[self.s1]
         t2 = solution.team_list[self.s2]
@@ -198,6 +203,8 @@ class LocalMove:
                 incr += w
         return incr
 
+#Swap operation and checkking if swap has increase or decrease affinity among teams 
+# compute increment before updating counts. Increment measures change from current state.
     def apply_move(self, solution):                              
         solution.lb += self.objective_value_increment(solution)
         
@@ -225,18 +232,18 @@ class LocalMove:
         solution.lookup[t1].append(self.s2)
         return solution
 
-
+#Local neighbhbourhood
 class LocalNeighbourhood:
     def __init__(self, problem):
         self.problem = problem
-
+#Helper function to detect disagreement
     def swap_conflict(self, s, students):
-        """Checks if any two students has a disagreement when we shap"""
         for a, b in self.problem.dis:
             if (s == a and b in students) or (s == b and a in students):
                 return True
         return False
 
+#All valid swaps 
     def moves(self, solution):
         """ All the applied swappeds avaible for us """
         teams = list(range(len(solution.lookup)))
@@ -253,7 +260,9 @@ class LocalNeighbourhood:
 
 
 
-#Greedy Algorithms
+#=================================== Heuristics ==================================================================
+
+#First improvement 
 def first_improvement(solution):
     p = solution.problem
     local_nb = p.local_neighbourhood()
@@ -269,7 +278,7 @@ def first_improvement(solution):
             break                  
     return s
 
-
+#Greedy search
 def greedy_algorithm(problem):
     constr_rule = problem.construction_neighbourhood()
     s = problem.empty_solution()
@@ -292,8 +301,7 @@ def greedy_algorithm(problem):
     res_time = end_time - start_time
     return s
 
-
-#Random
+#Random Greedy search
 def random_greedy(problem):
     constr_rule = problem.construction_neighbourhood()
     s = problem.empty_solution()
@@ -305,7 +313,7 @@ def random_greedy(problem):
         move.apply_move(s)
     return s
 
-
+#Best improvement
 def best_improvement(solution):
     p = solution.problem
     local_nb = p.local_neighbourhood()
@@ -325,10 +333,11 @@ def best_improvement(solution):
     res_time = end_time - start_time
     return s, res_time
 
+#Scheduler simulated annealing 
 def geometric(temp,k):
     return temp * 0.995
 
-
+#Simulated annealing 
 def simulated_annealing(problem, schedule=geometric, time_limit=60):
     s = greedy_algorithm(problem)
     neigh = problem.local_neighbourhood()
