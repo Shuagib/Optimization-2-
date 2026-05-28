@@ -144,11 +144,10 @@ if __name__ == '__main__':
 #================================ Meta heuristic: Simulated Annealing ===================================#
 
     instances = [
-    "Case 2/tfp_131n_27q_4l_5u_10a_10d.txt",
-    "Case 2/tfp_200n_40q_5l_5u_10a_15d.txt",
-    "Case 2/tfp_300n_60q_5l_5u_10a_40d.txt",
-    ]    
-
+    "../../Data/tfp_131n_27q_4l_5u_10a_10d.txt",
+    "../../Data/tfp_200n_40q_5l_5u_10a_15d.txt",
+    "../../Data/tfp_300n_60q_5l_5u_10a_40d.txt",
+]
     for filename in instances:
         with open(filename) as f:
             p = Problem.from_textio(f)
@@ -187,3 +186,8 @@ if __name__ == '__main__':
         print(f"Median: {statistics.median(results)}")
         print(f"Avg time:  {statistics.mean(times):.2f}s")
         print(f"Best solution saved to: {output_file}")
+
+
+
+
+

@@ -330,7 +330,7 @@ def geometric(temp,k):
 
 
 def simulated_annealing(problem, schedule=geometric, time_limit=60):
-    s, _ = greedy_algorithm(problem)
+    s = greedy_algorithm(problem)
     neigh = problem.local_neighbourhood()
 
     best = s.copy_solution()
@@ -376,6 +376,8 @@ def simulated_annealing(problem, schedule=geometric, time_limit=60):
         temp = schedule(temp, k)
             
     return best
+
+
 
 
 
