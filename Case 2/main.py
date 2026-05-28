@@ -144,8 +144,8 @@ if __name__ == '__main__':
 #================================ Meta heuristic: Simulated Annealing ===================================#
 
     instances = [
-    "Case 2/tfp_131n_27q_4l_5u_10a_10d.txt",
-    "Case 2/tfp_200n_40q_5l_5u_10a_15d.txt",
+    # "Case 2/tfp_131n_27q_4l_5u_10a_10d.txt",
+    # "Case 2/tfp_200n_40q_5l_5u_10a_15d.txt",
     "Case 2/tfp_300n_60q_5l_5u_10a_40d.txt",
     ]    
 
@@ -162,7 +162,7 @@ if __name__ == '__main__':
             print(f"Starting {filename}, run {run + 1}")
             start = time.perf_counter()
 
-            s = simulated_annealing(p)
+            s = simulated_annealing(p,time_limit=120)
 
             elapsed = time.perf_counter() - start
             value = s.objective_value()
