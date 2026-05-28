@@ -7,7 +7,7 @@ if __name__ == '__main__':
 
 #================================ Testing Construction Heuristics ========================================#
 #=============================================SMALL FILES==============================================#
-    # f_1 = open("tfp_13n_3q_4l_5u_3a_5d.txt")
+    # f_1 = open("Data/tfp_13n_3q_4l_5u_3a_5d.txt")
     # p = Problem.from_textio(f_1)
     # f_1.close()
     # #s,t = greedy_algorithm(p)
@@ -24,7 +24,7 @@ if __name__ == '__main__':
 
 
 # #=============================================Medium File 1 ==============================================#
-    # f_2 = open("tfp_131n_27q_4l_5u_10a_10d.txt")
+    # f_2 = open("Data/tfp_131n_27q_4l_5u_10a_10d.txt")
     # p = Problem.from_textio(f_2)
     # f_2.close()
     # s,t = greedy_algorithm(p)
@@ -38,7 +38,7 @@ if __name__ == '__main__':
 
 # #=============================================Medium File 2 ==============================================#
 
-    # f_3 = open("tfp_200n_40q_5l_5u_10a_15d.txt")
+    # f_3 = open("Data/tfp_200n_40q_5l_5u_10a_15d.txt")
     # p = Problem.from_textio(f_3)
     # f_3.close()
     # s,t = greedy_algorithm(p)
@@ -53,7 +53,7 @@ if __name__ == '__main__':
 
 
 # #=============================================Big File==============================================#
-    # f_3 = open("tfp_300n_60q_5l_5u_10a_40d.txt")
+    # f_3 = open("Data/tfp_300n_60q_5l_5u_10a_40d.txt")
     # p = Problem.from_textio(f_3)
     # f_3.close()
     # s,t = greedy_algorithm(p)
@@ -67,7 +67,7 @@ if __name__ == '__main__':
 
 
 #================== Testing Random Greedy #===================
-    # f_1 = open("tfp_13n_3q_4l_5u_3a_5d.txt")
+    # f_1 = open("Data/tfp_13n_3q_4l_5u_3a_5d.txt")
     # p = Problem.from_textio(f_1)
     # f_1.close()
 
@@ -85,7 +85,7 @@ if __name__ == '__main__':
     # print(f"Avg time: {statistics.mean(times):.4f}s")
 
 
-    # f_1 =open("tfp_300n_60q_5l_5u_10a_40d.txt")
+    # f_1 =open("Data/tfp_300n_60q_5l_5u_10a_40d.txt")
     # p = Problem.from_textio(f_1)
     # f_1.close()
 
@@ -103,7 +103,7 @@ if __name__ == '__main__':
     # print(f"Avg time: {statistics.mean(times):.4f}s")
 
 
-    # f_1 = open("tfp_200n_40q_5l_5u_10a_15d.txt")
+    # f_1 = open("Data/tfp_200n_40q_5l_5u_10a_15d.txt")
     # p = Problem.from_textio(f_1)
     # f_1.close()
 
@@ -121,7 +121,7 @@ if __name__ == '__main__':
     # print(f"Avg time: {statistics.mean(times):.4f}s")
 
 
-    # f_1 = open("tfp_300n_60q_5l_5u_10a_40d.txt")
+    # f_1 = open("Data/tfp_300n_60q_5l_5u_10a_40d.txt")
     # p = Problem.from_textio(f_1)
     # f_1.close()
 
@@ -144,8 +144,8 @@ if __name__ == '__main__':
 #================================ Meta heuristic: Simulated Annealing ===================================#
 
     instances = [
-    # "Data/tfp_131n_27q_4l_5u_10a_10d.txt",
-    # "Data/tfp_200n_40q_5l_5u_10a_15d.txt",
+    "Data/tfp_131n_27q_4l_5u_10a_10d.txt",
+    "Data/tfp_200n_40q_5l_5u_10a_15d.txt",
     "Data/tfp_300n_60q_5l_5u_10a_40d.txt",
 ]
     for filename in instances:
