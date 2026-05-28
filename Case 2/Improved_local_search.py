@@ -187,15 +187,14 @@ class LocalMove:
                 continue        
             c1 = solution.team_labels[t1][a]   
             c2 = solution.team_labels[t2][a]   
-            # t1: s1 leaves, s2 arrives
             if c1.get(l1, 0) == 1:  
                 incr -= w           
-            if c1.get(l2, 0) == 0:   # l2 new to t1
+            if c1.get(l2, 0) == 0:
                 incr += w
-            # t2: s2 leaves, s1 arrives
-            if c2.get(l2, 0) == 1:   # s2 is last holder of l2 in t2
+         
+            if c2.get(l2, 0) == 1:   
                 incr -= w
-            if c2.get(l1, 0) == 0:   # l1 new to t2
+            if c2.get(l1, 0) == 0:  
                 incr += w
         return incr
 
@@ -258,6 +257,22 @@ class LocalNeighbourhood:
 
 
 #Greedy Algorithms
+def first_improvement(solution):
+    p = solution.problem
+    local_nb = p.local_neighbourhood()
+    s = solution.copy_solution()
+    while True:
+        improved = False
+        for move in local_nb.moves(s):
+            if move.objective_value_increment(s) < 0:
+                move.apply_move(s)
+                improved = True
+                break             
+        if not improved:
+            break                  
+    return s
+
+
 def greedy_algorithm(problem):
     constr_rule = problem.construction_neighbourhood()
     s = problem.empty_solution()
@@ -278,7 +293,7 @@ def greedy_algorithm(problem):
         #print(f"s: {s}\n")
     end_time = time.perf_counter()
     res_time = end_time - start_time
-    return s, res_time
+    return s
 
 
 #Random
@@ -311,9 +326,6 @@ def best_improvement(solution):
         print(f"best_incr: {best_incr}")
     end_time = time.time()
     res_time = end_time - start_time
-    return s, res_time
-
-
-
+    return s
 
 
