@@ -253,10 +253,6 @@ class LocalNeighbourhood:
 
 
 
-
-
-
-
 #Greedy Algorithms
 def greedy_algorithm(problem):
     constr_rule = problem.construction_neighbourhood()
