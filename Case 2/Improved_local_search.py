@@ -243,11 +243,13 @@ class LocalNeighbourhood:
         teams = list(range(len(solution.lookup)))
         for i in range(len(teams)):
             for j in range(i + 1, len(teams)):
-                t1 = teams[i]
-                t2 = teams[j]
+                t1, t2 = teams[i], teams[j]
                 for s1 in solution.lookup[t1]:
                     for s2 in solution.lookup[t2]:
-                        if self.swap_conflict(s1, solution.lookup[t2]) or  self.swap_conflict(s2, solution.lookup[t1]):
+                        # Exclude the student being swapped out from each check
+                        t2_after = [x for x in solution.lookup[t2] if x != s2]
+                        t1_after = [x for x in solution.lookup[t1] if x != s1]
+                        if self.swap_conflict(s1, t2_after) or self.swap_conflict(s2, t1_after):
                             continue
                         yield LocalMove(s1, s2, self)
 
@@ -309,8 +311,8 @@ def best_improvement(solution):
     res_time = end_time - start_time
     return s, res_time
 
-def geometric(temp,k=0.99):
-    return temp * k
+def geometric(temp,k):
+    return temp * 0.99
 
 
 def simulated_annealing(problem, schedule=geometric, time_limit=60):
@@ -330,33 +332,28 @@ def simulated_annealing(problem, schedule=geometric, time_limit=60):
     start = time.time()
     k = 0
 
-    while temp > temp_min and time.time() - start < time_limit:  
+    while temp > temp_min and time.time() - start < time_limit:
+        move_list = list(neigh.moves(s))   # build once, reuse inner times
+        if not move_list:
+            break
+
         for _ in range(inner):
             if time.time() - start >= time_limit:
                 break
 
-            moves = neigh.moves(s)
-
-            move = None
-            for i, m in enumerate(moves):
-                if random.randint(0, i) == 0:
-                    move = m
-
-            if move is None:
-                break
-        
+            move = random.choice(move_list)   
             delta = move.objective_value_increment(s)
 
             if delta < 0 or random.random() < math.exp(-delta / temp):
                 move.apply_move(s)
+                move_list = list(neigh.moves(s))  
                 val = s.objective_value()
-
                 if val < best_val:
                     best, best_val = s.copy_solution(), val
 
         k += 1
         temp = schedule(temp, k)
-        
+            
     return best
 
 
