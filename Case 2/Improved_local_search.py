@@ -342,11 +342,14 @@ def simulated_annealing(problem, schedule=geometric, time_limit=60):
                 break
 
             move = random.choice(move_list)   
+
+            if s.team_list[move.s1] == s.team_list[move.s2]:
+                continue
+
             delta = move.objective_value_increment(s)
 
             if delta < 0 or random.random() < math.exp(-delta / temp):
-                move.apply_move(s)
-                move_list = list(neigh.moves(s))  
+                move.apply_move(s) 
                 val = s.objective_value()
                 if val < best_val:
                     best, best_val = s.copy_solution(), val
