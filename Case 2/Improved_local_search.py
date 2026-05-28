@@ -313,8 +313,8 @@ def best_improvement(solution):
     res_time = end_time - start_time
     return s, res_time
 
-def geometric(temp,k):
-    return temp * 0.99
+def geometric(temp,k=0.99):
+    return temp * k
 
 
 def simulated_annealing(problem, schedule=geometric, time_limit=60):
