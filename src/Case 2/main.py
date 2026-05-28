@@ -144,8 +144,8 @@ if __name__ == '__main__':
 #================================ Meta heuristic: Simulated Annealing ===================================#
 
     instances = [
-    "../../Data/tfp_131n_27q_4l_5u_10a_10d.txt",
-    "../../Data/tfp_200n_40q_5l_5u_10a_15d.txt",
+    # "../../Data/tfp_131n_27q_4l_5u_10a_10d.txt",
+    # "../../Data/tfp_200n_40q_5l_5u_10a_15d.txt",
     "../../Data/tfp_300n_60q_5l_5u_10a_40d.txt",
 ]
     for filename in instances:
