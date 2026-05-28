@@ -253,9 +253,6 @@ class LocalNeighbourhood:
 
 
 
-
-
-
 #Greedy Algorithms
 def first_improvement(solution):
     p = solution.problem
@@ -288,7 +285,7 @@ def greedy_algorithm(problem):
                     break
         if best_move is None:
             break
-        print(f"best move: {best_move}")
+        #print(f"best move: {best_move}")
         best_move.apply_move(s)
         #print(f"s: {s}\n")
     end_time = time.perf_counter()
@@ -326,6 +323,58 @@ def best_improvement(solution):
         print(f"best_incr: {best_incr}")
     end_time = time.time()
     res_time = end_time - start_time
-    return s
+    return s, res_time
+
+def geometric(temp,k):
+    return temp * 0.995
+
+
+def simulated_annealing(problem, schedule=geometric, time_limit=60):
+    s, _ = greedy_algorithm(problem)
+    neigh = problem.local_neighbourhood()
+
+    best = s.copy_solution()
+    best_val = s.objective_value()
+
+    # Initial temperature
+    typical_delta = s.objective_value() * 0.01 
+    temp = -typical_delta / math.log(0.20)   
+    temp_min = 0.01
+
+    # Number of sampled moves per temperature level
+    inner = max(100, problem.stud)
+    
+    start = time.time()
+    k = 0
+
+    while temp > temp_min and time.time() - start < time_limit:
+        move_list = list(neigh.moves(s))
+        if not move_list:
+            break
+
+        for _ in range(inner):
+            if time.time() - start >= time_limit:
+                break
+
+            move = random.choice(move_list)   
+            delta = move.objective_value_increment(s)
+
+            if delta < 0 or random.random() < math.exp(-delta / temp):
+                move.apply_move(s)
+                move_list = list(neigh.moves(s))  
+                val = s.objective_value()
+                if val < best_val:
+                    best, best_val = s.copy_solution(), val
+
+        if s.objective_value() > best_val * 1.10:
+            s = best.copy_solution()
+
+        k += 1
+        temp = schedule(temp, k)
+            
+    return best
+
+
+
 
 

@@ -5,8 +5,6 @@ import statistics, time
 
 if __name__ == '__main__':
 
-    
-
 #================================ Testing Construction Heuristics ========================================#
 #=============================================SMALL FILES==============================================#
     # f_1 = open("tfp_13n_3q_4l_5u_3a_5d.txt")
@@ -69,8 +67,6 @@ if __name__ == '__main__':
 
 
 #================== Testing Random Greedy #===================
-
-
     # f_1 = open("tfp_13n_3q_4l_5u_3a_5d.txt")
     # p = Problem.from_textio(f_1)
     # f_1.close()
@@ -87,124 +83,6 @@ if __name__ == '__main__':
     # print(f"Best:   {min(results)}")
     # print(f"Median: {statistics.median(results)}")
     # print(f"Avg time: {statistics.mean(times):.4f}s")
-
-
-
-#================================ Testing Local search Heuristics ========================================#
-    # f_2 = open("tfp_300n_60q_5l_5u_10a_40d.txt")
-    # p = Problem.from_textio(f_2)
-    # f_2.close()
-    # g,t = greedy_algorithm(p)
-    # first = first_improvement(g)
-    # improved,t = best_improvement(g)                
-    # improved_value = improved.objective_value()
-    # first_value = first.objective_value()
-    # print("""=======================================================================================================""")
-    # print(f""" \t Medium File  \t  \n # 131 tmembers, 27 teams, 10 attributes, 10 disagreements, 4 to 5 tmembers per team
-    # \n 100 90 80 70 60 50 40 30 20 10""")
-    # print(f"Objective Construction Roar Api: {g.objective_value()}")
-    # print(f"Local Search Best improvement : {improved_value}")
-    # print(f"Local Search first improvement : {first_value}")
-
-
-
-#================================ Testing Best Improvement Heuristics ========================================#
-    # f_1 = open("tfp_13n_3q_4l_5u_3a_5d.txt")
-    # p = Problem.from_textio(f_1)
-    # f_1.close()
-    # g_1 = greedy_algorithm(p)
-
-    # results = []
-    # times = []
-    # for run in range(10):                        
-    #     start = time.perf_counter()
-    #     s = best_improvement(g_1)               
-    #     elapsed = time.perf_counter() - start
-    #     results.append(s.objective_value())
-    #     times.append(elapsed)
-
-    # print(f"Best:   {min(results)}")
-    # print(f"Median: {statistics.median(results)}")
-    # print(f"Avg time: {statistics.mean(times):.4f}s")
-
-
-    # f_1 = open("tfp_131n_27q_4l_5u_10a_10d.txt")
-    # p = Problem.from_textio(f_1)
-    # f_1.close()
-    # g_ = greedy_algorithm(p)
-
-    # results = []
-    # times = []
-    # for run in range(10):                        
-    #     start = time.perf_counter()
-    #     s = best_improvement(g_)               
-    #     elapsed = time.perf_counter() - start
-    #     results.append(s.objective_value())
-    #     times.append(elapsed)
-
-    # print(f"Best:   {min(results)}")
-    # print(f"Median: {statistics.median(results)}")
-    # print(f"Avg time: {statistics.mean(times):.4f}s")
-
-
-    # f_1 = open("tfp_200n_40q_5l_5u_10a_15d.txt")
-    # p = Problem.from_textio(f_1)
-    # f_1.close()
-    # g_2 = greedy_algorithm(p)
-
-    # results = []
-    # times = []
-    # for run in range(10):                        
-    #     start = time.perf_counter()
-    #     s = best_improvement(g_2)               
-    #     elapsed = time.perf_counter() - start
-    #     results.append(s.objective_value())
-    #     times.append(elapsed)
-
-    # print(f"Best:   {min(results)}")
-    # print(f"Median: {statistics.median(results)}")
-    # print(f"Avg time: {statistics.mean(times):.4f}s")
-
-
-    # f_1 = open("tfp_300n_60q_5l_5u_10a_40d.txt")
-    # p = Problem.from_textio(f_1)
-    # f_1.close()
-    # g_3 = greedy_algorithm(p)
-
-    # results = []
-    # times = []
-    # for run in range(10):                        
-    #     start = time.perf_counter()
-    #     s = best_improvement(g_3)               
-    #     elapsed = time.perf_counter() - start
-    #     results.append(s.objective_value())
-    #     times.append(elapsed)
-
-    # print(f"Best:   {min(results)}")
-    # print(f"Median: {statistics.median(results)}")
-    # print(f"Avg time: {statistics.mean(times):.4f}s")
-
-
-
-
-#================================ Testing First improvement Heuristics ========================================#
-
-    f_1 = open("tfp_300n_60q_5l_5u_10a_40d.txt")
-    p = Problem.from_textio(f_1)
-    f_1.close()
-    g = greedy_algorithm(p)
-
-    results = []
-    times = []
-    for run in range(10):                        
-        start = time.perf_counter()           
-        elapsed = time.perf_counter() - start
-        results.append(g.objective_value())
-        times.append(elapsed)
-
-    print(f"Best:   {min(results)}")
-    print(f"Median: {statistics.median(results)}")
-    print(f"Avg time: {statistics.mean(times):.4f}s")
 
 
     # f_1 =open("tfp_300n_60q_5l_5u_10a_40d.txt")
@@ -263,6 +141,49 @@ if __name__ == '__main__':
 
 
 
-#================================ Meta heuristics  ========================================#
+#================================ Meta heuristic: Simulated Annealing ===================================#
 
+    instances = [
+    "Case 2/tfp_131n_27q_4l_5u_10a_10d.txt",
+    "Case 2/tfp_200n_40q_5l_5u_10a_15d.txt",
+    "Case 2/tfp_300n_60q_5l_5u_10a_40d.txt",
+    ]    
 
+    for filename in instances:
+        with open(filename) as f:
+            p = Problem.from_textio(f)
+
+        results = []
+        times = []
+        best_solution = None
+        best_value = float("inf")
+
+        for run in range(10):
+            print(f"Starting {filename}, run {run + 1}")
+            start = time.perf_counter()
+
+            s = simulated_annealing(p)
+
+            elapsed = time.perf_counter() - start
+            value = s.objective_value()
+
+            results.append(value)
+            times.append(elapsed)
+            
+            print(f"Finished {filename}, run {run + 1}: value={value}, time={elapsed:.2f}s")
+
+            if value < best_value:
+                best_value = value
+                best_solution = s.copy_solution()
+            
+            print(f"{filename}, run {run + 1}: Value={value}, time={elapsed:.2f}s")
+
+        output_file = filename.replace(".txt", "_sa_best.sol")
+        best_solution.save_solution(output_file)
+
+        print("============================================================")
+        print(f"Instance: {filename}")
+        print(f"Best: {min(results)}")
+        print(f"Median: {statistics.median(results)}")
+        print(f"Avg time:  {statistics.mean(times):.2f}s")
+        print(f"Best solution saved to: {output_file}")
