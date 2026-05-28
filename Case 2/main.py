@@ -1,6 +1,6 @@
 from Improved_local_search import * 
 #from roar_net_api.algorithms import first_improvement, best_improvement
-from roar_net_api.algorithms import greedy_construction
+#from roar_net_api.algorithms import greedy_construction
 import statistics, time
 
 if __name__ == '__main__':
@@ -85,25 +85,58 @@ if __name__ == '__main__':
     # print(f"Avg time: {statistics.mean(times):.4f}s")
 
 
+    # f_1 =open("tfp_300n_60q_5l_5u_10a_40d.txt")
+    # p = Problem.from_textio(f_1)
+    # f_1.close()
 
-#================================ Testing Local search Heuristics ========================================#
-    # f_2 = open("tfp_131n_27q_4l_5u_10a_10d.txt")
-    # p = Problem.from_textio(f_2)
-    # f_2.close()
-    # g = greedy_algorithm(p)
-    # s = greedy_construction(p)    
-    # # improved = best_improvement(s)                
-    # # improved_value = improved.objective_value()
-    # #result_geo = simulated_annealing(p, geometric)
-    # print("""=======================================================================================================""")
-    # print(f""" \t Medium File  \t  \n # 131 tmembers, 27 teams, 10 attributes, 10 disagreements, 4 to 5 tmembers per team
-    # \n 100 90 80 70 60 50 40 30 20 10""")
-    # print(f"Objective Construction Roar Api: {s.objective_value()}")
-    # print(f"Objective Construction implemented: {g.objective_value()}")
-    # # print(f"Local Search Best improvement : {improved_value}")
-    # #print(f"Metaheuristic Improvement : {result_geo.objective_value()}")
-  
+    # results = []
+    # times = []
+    # for run in range(10):                        
+    #     start = time.perf_counter()
+    #     s = first_improvement(p)               
+    #     elapsed = time.perf_counter() - start
+    #     results.append(s.objective_value())
+    #     times.append(elapsed)
 
+    # print(f"Best:   {min(results)}")
+    # print(f"Median: {statistics.median(results)}")
+    # print(f"Avg time: {statistics.mean(times):.4f}s")
+
+
+    # f_1 = open("tfp_200n_40q_5l_5u_10a_15d.txt")
+    # p = Problem.from_textio(f_1)
+    # f_1.close()
+
+    # results = []
+    # times = []
+    # for run in range(10):                        
+    #     start = time.perf_counter()
+    #     s = first_improvement(p)               
+    #     elapsed = time.perf_counter() - start
+    #     results.append(s.objective_value())
+    #     times.append(elapsed)
+
+    # print(f"Best:   {min(results)}")
+    # print(f"Median: {statistics.median(results)}")
+    # print(f"Avg time: {statistics.mean(times):.4f}s")
+
+
+    # f_1 = open("tfp_300n_60q_5l_5u_10a_40d.txt")
+    # p = Problem.from_textio(f_1)
+    # f_1.close()
+
+    # results = []
+    # times = []
+    # for run in range(10):                        
+    #     start = time.perf_counter()
+    #     s = first_improvement(p)               
+    #     elapsed = time.perf_counter() - start
+    #     results.append(s.objective_value())
+    #     times.append(elapsed)
+
+    # print(f"Best:   {min(results)}")
+    # print(f"Median: {statistics.median(results)}")
+    # print(f"Avg time: {statistics.mean(times):.4f}s")
 
 
 

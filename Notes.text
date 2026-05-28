@@ -184,3 +184,52 @@ Current Matrix A [[ 1  0]
 Current Vector b  [1.   1.   1.   1.   0.15]
 Scaling row 5 as [0 0] by gamma=0.1: x* = [0. 0.] and the old point is x*_old [-0.23851648 -0.23851648]
  The different is 0.3373132422265876
+
+
+
+best improvement 
+small file 
+ Best:   390
+Median: 390.0
+Avg time: 0.0001s
+second file 
+Best:   31630
+Median: 31630.0
+Avg time: 0.5743s
+Third file 
+Best:   42360
+Median: 42360.0
+Avg time: 2.3089s
+fourth file
+best_incr: -90
+Best:   69070
+Median: 69070.0
+Avg time: 11.6431s
+
+
+First improvement 
+first file
+Best:   390
+Median: 390.0
+Avg time: 0.0001s
+
+second file 
+Best:   31630
+Median: 31630.0
+Avg time: 0.2582s
+
+third file
+Best:   42600
+Median: 42600.0
+Avg time: 1.4571s
+
+fourht file 
+Best:   68500
+Median: 68500.0
+Avg time: 8.1596s
+
+
+Greedy algorithm 
+Best:   390
+Median: 390.0
+Avg time: 0.0000s
