@@ -243,15 +243,14 @@ class LocalNeighbourhood:
         teams = list(range(len(solution.lookup)))
         for i in range(len(teams)):
             for j in range(i + 1, len(teams)):
-                t1, t2 = teams[i], teams[j]
+                t1 = teams[i]
+                t2 = teams[j]
                 for s1 in solution.lookup[t1]:
                     for s2 in solution.lookup[t2]:
-                        # Exclude the student being swapped out from each check
-                        t2_after = [x for x in solution.lookup[t2] if x != s2]
-                        t1_after = [x for x in solution.lookup[t1] if x != s1]
-                        if self.swap_conflict(s1, t2_after) or self.swap_conflict(s2, t1_after):
+                        if self.swap_conflict(s1, solution.lookup[t2]) or  self.swap_conflict(s2, solution.lookup[t1]):
                             continue
                         yield LocalMove(s1, s2, self)
+
 
 
 
@@ -312,7 +311,7 @@ def best_improvement(solution):
     return s, res_time
 
 def geometric(temp,k):
-    return temp * 0.99
+    return temp * 0.995
 
 
 def simulated_annealing(problem, schedule=geometric, time_limit=60):
@@ -323,7 +322,8 @@ def simulated_annealing(problem, schedule=geometric, time_limit=60):
     best_val = s.objective_value()
 
     # Initial temperature
-    temp = s.objective_value() * 0.02 / abs(math.log(0.97))
+    typical_delta = s.objective_value() * 0.01 
+    temp = -typical_delta / math.log(0.20)   
     temp_min = 0.01
 
     # Number of sampled moves per temperature level
@@ -333,7 +333,7 @@ def simulated_annealing(problem, schedule=geometric, time_limit=60):
     k = 0
 
     while temp > temp_min and time.time() - start < time_limit:
-        move_list = list(neigh.moves(s))   # build once, reuse inner times
+        move_list = list(neigh.moves(s))
         if not move_list:
             break
 
@@ -350,6 +350,9 @@ def simulated_annealing(problem, schedule=geometric, time_limit=60):
                 val = s.objective_value()
                 if val < best_val:
                     best, best_val = s.copy_solution(), val
+
+        if s.objective_value() > best_val * 1.10:
+            s = best.copy_solution()
 
         k += 1
         temp = schedule(temp, k)
